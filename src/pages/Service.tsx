@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
@@ -102,6 +103,7 @@ const Service = () => {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 };
