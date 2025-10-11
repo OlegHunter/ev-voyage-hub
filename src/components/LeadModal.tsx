@@ -6,6 +6,29 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
+import { z } from "zod";
+
+const leadSchema = z.object({
+  name: z.string()
+    .trim()
+    .min(2, { message: "Ім'я повинно містити мінімум 2 символи" })
+    .max(100, { message: "Ім'я занадто довге" })
+    .regex(/^[\p{L}\s'-]+$/u, { message: "Ім'я містить недопустимі символи" }),
+  phone: z.string()
+    .trim()
+    .regex(/^\+?[0-9]{10,15}$/, { message: "Невірний формат телефону (тільки цифри, 10-15 символів)" }),
+  email: z.string()
+    .trim()
+    .email({ message: "Невірний формат email" })
+    .max(255)
+    .optional()
+    .or(z.literal('')),
+  message: z.string()
+    .trim()
+    .max(2000, { message: "Повідомлення занадто довге (макс. 2000 символів)" })
+    .optional()
+    .or(z.literal(''))
+});
 
 interface LeadModalProps {
   open: boolean;
@@ -28,11 +51,19 @@ export const LeadModal = ({ open, onOpenChange, carId, source = "website" }: Lea
     setLoading(true);
 
     try {
-      const { error } = await supabase.from("leads").insert({
+      // Validate input data
+      const validatedData = leadSchema.parse({
         name: formData.name,
         phone: formData.phone,
-        email: formData.email || null,
-        message: formData.message || null,
+        email: formData.email,
+        message: formData.message
+      });
+
+      const { error } = await supabase.from("leads").insert({
+        name: validatedData.name,
+        phone: validatedData.phone,
+        email: validatedData.email || null,
+        message: validatedData.message || null,
         car_id: carId || null,
         source
       });
@@ -47,11 +78,19 @@ export const LeadModal = ({ open, onOpenChange, carId, source = "website" }: Lea
       setFormData({ name: "", phone: "", email: "", message: "" });
       onOpenChange(false);
     } catch (error) {
-      toast({
-        title: "Помилка",
-        description: "Не вдалося відправити заявку. Спробуйте ще раз.",
-        variant: "destructive"
-      });
+      if (error instanceof z.ZodError) {
+        toast({
+          title: "Помилка валідації",
+          description: error.errors[0].message,
+          variant: "destructive"
+        });
+      } else {
+        toast({
+          title: "Помилка",
+          description: "Не вдалося відправити заявку. Спробуйте ще раз.",
+          variant: "destructive"
+        });
+      }
     } finally {
       setLoading(false);
     }
