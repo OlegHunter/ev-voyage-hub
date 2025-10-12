@@ -59,13 +59,17 @@ export const LeadModal = ({ open, onOpenChange, carId, source = "website" }: Lea
         message: formData.message
       });
 
-      const { error } = await supabase.from("leads").insert({
-        name: validatedData.name,
-        phone: validatedData.phone,
-        email: validatedData.email || null,
-        message: validatedData.message || null,
-        car_id: carId || null,
-        source
+      // Call the process-lead edge function
+      const { data, error } = await supabase.functions.invoke('process-lead', {
+        body: {
+          name: validatedData.name,
+          phone: validatedData.phone,
+          email: validatedData.email || undefined,
+          comment: validatedData.message || undefined,
+          car_id: carId || undefined,
+          source_page: source,
+          type: carId ? 'car_inquiry' : 'general'
+        }
       });
 
       if (error) throw error;
