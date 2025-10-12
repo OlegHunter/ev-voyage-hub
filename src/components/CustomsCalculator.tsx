@@ -25,9 +25,8 @@ export const CustomsCalculator = () => {
       const { data } = await supabase
         .from("calculator_configs")
         .select("formula_js")
-        .eq("type", "customs_clearance")
-        .eq("is_active", true)
-        .single();
+        .eq("calculator_type", "customs_clearance")
+        .maybeSingle();
 
       if (data) {
         setFormula(data.formula_js);

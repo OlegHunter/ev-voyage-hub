@@ -9,8 +9,8 @@ interface Brand {
   id: string;
   slug: string;
   name: string;
-  logo?: string;
-  country_origin?: string;
+  logo_url?: string;
+  country?: string;
 }
 
 export const BrandsSection = () => {
@@ -20,7 +20,7 @@ export const BrandsSection = () => {
     const fetchBrands = async () => {
       const { data } = await supabase
         .from("brands")
-        .select("id, slug, name, logo, country_origin")
+        .select("id, slug, name, logo_url, country")
         .order("name")
         .limit(6);
 
@@ -50,17 +50,17 @@ export const BrandsSection = () => {
             <Link key={brand.id} to={`/brands/${brand.slug}`}>
               <Card className="p-6 hover:shadow-lg hover:scale-105 transition-all cursor-pointer group">
                 <div className="aspect-square flex items-center justify-center">
-                  {brand.logo ? (
+                  {brand.logo_url ? (
                     <img
-                      src={brand.logo}
+                      src={brand.logo_url}
                       alt={brand.name}
                       className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform"
                     />
                   ) : (
                     <div className="text-center">
                       <p className="font-bold text-lg">{brand.name}</p>
-                      {brand.country_origin && (
-                        <p className="text-sm text-muted-foreground">{brand.country_origin}</p>
+                      {brand.country && (
+                        <p className="text-sm text-muted-foreground">{brand.country}</p>
                       )}
                     </div>
                   )}
