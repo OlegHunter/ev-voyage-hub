@@ -73,19 +73,27 @@ export const Footer = () => {
           <div className="space-y-4">
             <h3 className="font-heading font-bold text-lg">Контакти</h3>
             <div className="space-y-3">
-              <a href="tel:+380442345678" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+              <a href="tel:+380932639262" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
                 <Phone className="h-4 w-4" />
-                +38 (044) 234-56-78
+                +38 (093) 263-92-62
               </a>
-              <a href="mailto:info@carhunter.ua" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+              <a href="tel:+380985155338" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+                <Phone className="h-4 w-4" />
+                +38 (098) 515-53-38
+              </a>
+              <a href="tel:+380936394429" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+                <Phone className="h-4 w-4" />
+                +38 (093) 639-44-29
+              </a>
+              <a href="mailto:carhunterhub@gmail.com" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
                 <Mail className="h-4 w-4" />
-                info@carhunter.ua
+                carhunterhub@gmail.com
               </a>
               <div className="flex items-start gap-2 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4 mt-1 flex-shrink-0" />
                 <div>
-                  <p>Київ, вул. Хрещатик 1</p>
-                  <p>Одеса, вул. Дерибасівська 1</p>
+                  <p>м. Одеса, пров. Катаєва 2а</p>
+                  <p>Київ ТРЦ Республіка</p>
                 </div>
               </div>
             </div>

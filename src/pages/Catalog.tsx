@@ -12,6 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Zap, Gauge, Filter, X, TrendingUp, Shield, Clock } from "lucide-react";
 import { CarDetailModal } from "@/components/CarDetailModal";
 import { LeadModal } from "@/components/LeadModal";
+import { EmptyStateCatalog } from "@/components/EmptyStateCatalog";
 
 const Catalog = () => {
   const [brandFilter, setBrandFilter] = useState<string>("all");
@@ -318,6 +319,8 @@ const Catalog = () => {
                 );
               })}
             </div>
+          ) : !cars || cars.length === 0 ? (
+            <EmptyStateCatalog />
           ) : (
             <Card className="p-12 text-center">
               <p className="text-muted-foreground text-lg">
