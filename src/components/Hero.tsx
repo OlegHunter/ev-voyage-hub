@@ -1,15 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
-
 export const Hero = () => {
-  return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+  return <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
       {/* Animated background */}
       <div className="absolute inset-0 bg-gradient-dark">
         <div className="absolute inset-0 opacity-30">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/30 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-pulse" style={{
+          animationDelay: '1s'
+        }} />
         </div>
       </div>
       
@@ -19,7 +19,7 @@ export const Hero = () => {
       </div>
       
       {/* Content */}
-      <div className="relative z-10 container text-center space-y-8 animate-fade-in">
+      <div className="relative z-10 container text-center space-y-8 animate-fade-in bg-sky-900">
         <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-card/50 backdrop-blur-sm border border-primary/20">
           <Zap className="h-4 w-4 text-secondary" />
           <span className="text-sm text-muted-foreground">
@@ -48,7 +48,7 @@ export const Hero = () => {
             </Button>
           </Link>
           <Link to="/financing">
-            <Button size="lg" variant="outline" className="text-lg h-14 px-8">
+            <Button size="lg" variant="outline" className="text-lg h-14 px-8 font-thin text-green-50">
               Розрахувати фінансування
             </Button>
           </Link>
@@ -70,6 +70,5 @@ export const Hero = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
