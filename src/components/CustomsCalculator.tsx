@@ -22,15 +22,14 @@ export const CustomsCalculator = () => {
 
   useEffect(() => {
     const fetchFormula = async () => {
-      const { data } = await supabase
+      const { data } = await (supabase as any)
         .from("calculator_configs")
         .select("formula_js")
-        .eq("type", "customs_clearance")
-        .eq("is_active", true)
-        .single();
+        .eq("calculator_type", "customs_clearance")
+        .limit(1);
 
-      if (data) {
-        setFormula(data.formula_js);
+      if (data && data[0]) {
+        setFormula(data[0].formula_js as string);
       }
     };
     fetchFormula();

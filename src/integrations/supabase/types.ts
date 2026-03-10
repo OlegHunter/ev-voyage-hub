@@ -68,6 +68,110 @@ export type Database = {
           },
         ]
       }
+      brand_models: {
+        Row: {
+          brand_id: string | null
+          class: string | null
+          created_at: string | null
+          id: string
+          model_name: string
+          year_from: number | null
+          year_to: number | null
+        }
+        Insert: {
+          brand_id?: string | null
+          class?: string | null
+          created_at?: string | null
+          id?: string
+          model_name: string
+          year_from?: number | null
+          year_to?: number | null
+        }
+        Update: {
+          brand_id?: string | null
+          class?: string | null
+          created_at?: string | null
+          id?: string
+          model_name?: string
+          year_from?: number | null
+          year_to?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "brand_models_brand_id_fkey"
+            columns: ["brand_id"]
+            isOneToOne: false
+            referencedRelation: "brands"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      brands: {
+        Row: {
+          country: string | null
+          created_at: string | null
+          description: string | null
+          gallery: Json | null
+          id: string
+          logo_url: string | null
+          name: string
+          slug: string
+          updated_at: string | null
+        }
+        Insert: {
+          country?: string | null
+          created_at?: string | null
+          description?: string | null
+          gallery?: Json | null
+          id?: string
+          logo_url?: string | null
+          name: string
+          slug: string
+          updated_at?: string | null
+        }
+        Update: {
+          country?: string | null
+          created_at?: string | null
+          description?: string | null
+          gallery?: Json | null
+          id?: string
+          logo_url?: string | null
+          name?: string
+          slug?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      calculator_configs: {
+        Row: {
+          calculator_type: string
+          created_at: string | null
+          formula_description: string | null
+          formula_js: string
+          id: string
+          updated_at: string | null
+          variables: Json | null
+        }
+        Insert: {
+          calculator_type: string
+          created_at?: string | null
+          formula_description?: string | null
+          formula_js: string
+          id?: string
+          updated_at?: string | null
+          variables?: Json | null
+        }
+        Update: {
+          calculator_type?: string
+          created_at?: string | null
+          formula_description?: string | null
+          formula_js?: string
+          id?: string
+          updated_at?: string | null
+          variables?: Json | null
+        }
+        Relationships: []
+      }
       cars: {
         Row: {
           brand: string
@@ -81,10 +185,13 @@ export type Database = {
           price_usd: number
           range_km: number | null
           seo: Json | null
+          slug: string | null
           source_country: string | null
           specs: Json | null
+          specs_360_url: string | null
           status: Database["public"]["Enums"]["car_status"] | null
           trim: string | null
+          video_url: string | null
           year: number
         }
         Insert: {
@@ -99,10 +206,13 @@ export type Database = {
           price_usd: number
           range_km?: number | null
           seo?: Json | null
+          slug?: string | null
           source_country?: string | null
           specs?: Json | null
+          specs_360_url?: string | null
           status?: Database["public"]["Enums"]["car_status"] | null
           trim?: string | null
+          video_url?: string | null
           year: number
         }
         Update: {
@@ -117,11 +227,62 @@ export type Database = {
           price_usd?: number
           range_km?: number | null
           seo?: Json | null
+          slug?: string | null
           source_country?: string | null
           specs?: Json | null
+          specs_360_url?: string | null
           status?: Database["public"]["Enums"]["car_status"] | null
           trim?: string | null
+          video_url?: string | null
           year?: number
+        }
+        Relationships: []
+      }
+      carsBase: {
+        Row: {
+          ID_MARK: string | null
+          MODEL_ID: string | null
+          "Год марки до": number | null
+          "Год марки от": number | null
+          "Год модели до": number | null
+          "Год модели от": number | null
+          Класс: string | null
+          Марка: string | null
+          "Марка кириллица": string | null
+          Модель: string | null
+          "Модель кириллица": string | null
+          "Популярная марка": string | null
+          Страна: string | null
+        }
+        Insert: {
+          ID_MARK?: string | null
+          MODEL_ID?: string | null
+          "Год марки до"?: number | null
+          "Год марки от"?: number | null
+          "Год модели до"?: number | null
+          "Год модели от"?: number | null
+          Класс?: string | null
+          Марка?: string | null
+          "Марка кириллица"?: string | null
+          Модель?: string | null
+          "Модель кириллица"?: string | null
+          "Популярная марка"?: string | null
+          Страна?: string | null
+        }
+        Update: {
+          ID_MARK?: string | null
+          MODEL_ID?: string | null
+          "Год марки до"?: number | null
+          "Год марки от"?: number | null
+          "Год модели до"?: number | null
+          "Год модели от"?: number | null
+          Класс?: string | null
+          Марка?: string | null
+          "Марка кириллица"?: string | null
+          Модель?: string | null
+          "Модель кириллица"?: string | null
+          "Популярная марка"?: string | null
+          Страна?: string | null
         }
         Relationships: []
       }
@@ -149,6 +310,39 @@ export type Database = {
           Notes?: string | null
           PrimarySource?: string | null
           Year_start?: number | null
+        }
+        Relationships: []
+      }
+      failed_notifications: {
+        Row: {
+          created_at: string | null
+          error_message: string | null
+          id: string
+          lead_id: string | null
+          next_retry_at: string | null
+          notification_type: string
+          payload: Json | null
+          retry_count: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          error_message?: string | null
+          id?: string
+          lead_id?: string | null
+          next_retry_at?: string | null
+          notification_type: string
+          payload?: Json | null
+          retry_count?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          error_message?: string | null
+          id?: string
+          lead_id?: string | null
+          next_retry_at?: string | null
+          notification_type?: string
+          payload?: Json | null
+          retry_count?: number | null
         }
         Relationships: []
       }
@@ -218,39 +412,84 @@ export type Database = {
         }
         Relationships: []
       }
+      lead_attachments: {
+        Row: {
+          created_at: string | null
+          file_type: string | null
+          file_url: string
+          id: string
+          lead_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          file_type?: string | null
+          file_url: string
+          id?: string
+          lead_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          file_type?: string | null
+          file_url?: string
+          id?: string
+          lead_id?: string | null
+        }
+        Relationships: []
+      }
       leads: {
         Row: {
           calc_snapshot: Json | null
           car_id: string | null
           created_at: string | null
+          crm_id: string | null
           email: string | null
           id: string
+          lead_code: string | null
           message: string | null
           name: string
           phone: string
           source: string | null
+          source_page: string | null
+          telegram_response: Json | null
+          telegram_sent: boolean | null
+          type: string | null
+          utm_params: Json | null
         }
         Insert: {
           calc_snapshot?: Json | null
           car_id?: string | null
           created_at?: string | null
+          crm_id?: string | null
           email?: string | null
           id?: string
+          lead_code?: string | null
           message?: string | null
           name: string
           phone: string
           source?: string | null
+          source_page?: string | null
+          telegram_response?: Json | null
+          telegram_sent?: boolean | null
+          type?: string | null
+          utm_params?: Json | null
         }
         Update: {
           calc_snapshot?: Json | null
           car_id?: string | null
           created_at?: string | null
+          crm_id?: string | null
           email?: string | null
           id?: string
+          lead_code?: string | null
           message?: string | null
           name?: string
           phone?: string
           source?: string | null
+          source_page?: string | null
+          telegram_response?: Json | null
+          telegram_sent?: boolean | null
+          type?: string | null
+          utm_params?: Json | null
         }
         Relationships: [
           {
@@ -261,6 +500,48 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      news: {
+        Row: {
+          author: string | null
+          content: string
+          cover_image: string | null
+          created_at: string | null
+          excerpt: string | null
+          id: string
+          published_at: string | null
+          seo: Json | null
+          slug: string
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          author?: string | null
+          content: string
+          cover_image?: string | null
+          created_at?: string | null
+          excerpt?: string | null
+          id?: string
+          published_at?: string | null
+          seo?: Json | null
+          slug: string
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          author?: string | null
+          content?: string
+          cover_image?: string | null
+          created_at?: string | null
+          excerpt?: string | null
+          id?: string
+          published_at?: string | null
+          seo?: Json | null
+          slug?: string
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
       }
       orders: {
         Row: {
@@ -292,39 +573,113 @@ export type Database = {
         }
         Relationships: []
       }
+      page_blocks: {
+        Row: {
+          block_type: string
+          content: Json | null
+          created_at: string | null
+          id: string
+          page_id: string | null
+          sort_order: number | null
+        }
+        Insert: {
+          block_type: string
+          content?: Json | null
+          created_at?: string | null
+          id?: string
+          page_id?: string | null
+          sort_order?: number | null
+        }
+        Update: {
+          block_type?: string
+          content?: Json | null
+          created_at?: string | null
+          id?: string
+          page_id?: string | null
+          sort_order?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "page_blocks_page_id_fkey"
+            columns: ["page_id"]
+            isOneToOne: false
+            referencedRelation: "pages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pages: {
+        Row: {
+          created_at: string | null
+          id: string
+          published: boolean | null
+          seo: Json | null
+          slug: string
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          published?: boolean | null
+          seo?: Json | null
+          slug: string
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          published?: boolean | null
+          seo?: Json | null
+          slug?: string
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       products: {
         Row: {
           category: string | null
+          compatible_cars: Json | null
           created_at: string | null
           currency: string | null
           id: string
           images: string[] | null
           price: number
+          related_products: Json | null
           sku: string
+          slug: string | null
           specs: Json | null
           stock: number | null
           title: string
         }
         Insert: {
           category?: string | null
+          compatible_cars?: Json | null
           created_at?: string | null
           currency?: string | null
           id?: string
           images?: string[] | null
           price: number
+          related_products?: Json | null
           sku: string
+          slug?: string | null
           specs?: Json | null
           stock?: number | null
           title: string
         }
         Update: {
           category?: string | null
+          compatible_cars?: Json | null
           created_at?: string | null
           currency?: string | null
           id?: string
           images?: string[] | null
           price?: number
+          related_products?: Json | null
           sku?: string
+          slug?: string | null
           specs?: Json | null
           stock?: number | null
           title?: string
@@ -385,6 +740,36 @@ export type Database = {
         }
         Relationships: []
       }
+      service_types: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          icon: string | null
+          id: string
+          price_from: number | null
+          slug: string
+          title: string
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          icon?: string | null
+          id?: string
+          price_from?: number | null
+          slug: string
+          title: string
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          icon?: string | null
+          id?: string
+          price_from?: number | null
+          slug?: string
+          title?: string
+        }
+        Relationships: []
+      }
       services: {
         Row: {
           created_at: string | null
@@ -409,6 +794,24 @@ export type Database = {
           id?: string
           price?: number | null
           title?: string
+        }
+        Relationships: []
+      }
+      site_settings: {
+        Row: {
+          key: string
+          updated_at: string | null
+          value: Json
+        }
+        Insert: {
+          key: string
+          updated_at?: string | null
+          value: Json
+        }
+        Update: {
+          key?: string
+          updated_at?: string | null
+          value?: Json
         }
         Relationships: []
       }
